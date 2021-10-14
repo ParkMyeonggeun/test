@@ -7,7 +7,7 @@ import time
 #변수
 
 
-OderID = 'testMG23'                 #쇼핑몰주문번호
+OderID = 'testMG24'                 #쇼핑몰주문번호
 GoodsCode = '100014'                #쇼핑몰 상품품번
 Goods = '새우 텀블러'                 #주문 상품명
 GoodsN = '2'                        #수량
