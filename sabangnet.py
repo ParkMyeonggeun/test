@@ -7,7 +7,7 @@ import time
 #변수
 
 
-OderID = 'testMG24'                 #쇼핑몰주문번호
+OderID = 'testMG28'                 #쇼핑몰주문번호
 GoodsCode = '100014'                #쇼핑몰 상품품번
 Goods = '새우 텀블러'                 #주문 상품명
 GoodsN = '2'                        #수량
@@ -87,27 +87,49 @@ driver.find_element_by_name('delivery_method1').send_keys('무료')             
 driver.find_element_by_xpath('/html/body/div[4]/form/table[28]/tbody/tr/td/img').click()            #[저장]
 
 time.sleep(1)
-driver.refresh()
-time.sleep(1)
-
 driver.switch_to.alert.accept()
 time.sleep(1)
-#
-# driver.find_element_by_xpath('//*[@id="prod_frm"]/table[2]/tbody/tr/td[2]/img[1]').click()
-#
-#
-# time.sleep(1)
-# driver.switch_to.alert.accept()
-#
-# time.sleep(1)
-# driver.switch_to.window(driver.window_handles[-1])
-#
-# driver.find_element_by_xpath('/html/body/div/form/center/input').click()
-# driver.close()
-#
-# time.sleep(1)
-# driver.switch_to.window(driver.window_handles[0])
 
+#주문확정처리
+driver.find_elements_by_name('chk[]')[0].click()
+driver.find_element_by_xpath('//*[@id="prod_frm"]/table[2]/tbody/tr/td[2]/img[1]').click()
 
+time.sleep(1)
+driver.switch_to.alert.accept()
+time.sleep(1)
 
+driver.switch_to.window(driver.window_handles[-1])
+time.sleep(1)
+
+driver.find_element_by_xpath('/html/body/div/form/center/input').click()
+driver.close()
+
+time.sleep(1)
+driver.switch_to.window(driver.window_handles[0])
+time.sleep(1)
+
+driver.get('http://a200.sabangnet.co.kr/order/List_pdo')
+time.sleep(1)
+
+#주문검색
+driver.find_element_by_xpath('//*[@id="prod_frm"]/table/tbody/tr[1]/td[2]/a[1]/img').click()
+driver.find_element_by_name('search_str').send_keys(OderName)                                   #주문자명검색
+driver.find_element_by_xpath('//*[@id="prod_frm"]/table/tbody/tr[7]/td[2]/input[3]').click()
+
+#주문상태변경
+
+driver.find_element_by_xpath('//*[@id="prod_frm"]/table[2]/tbody/tr/td[2]/img[3]').click()
+
+time.sleep(1)
+driver.switch_to.window(driver.window_handles[-1])
+time.sleep(1)
+
+#주문확인처리
+select = Select(driver.find_element_by_xpath('/html/body/div[1]/form/table/tbody/tr[2]/td[2]/select'))
+select.select_by_value('002')
+
+#저장
+driver.find_element_by_xpath('/html/body/div[1]/form/center/img[1]').click()
+time.sleep(1)
+driver.find_element_by_xpath('/html/body/div/center/img').click()
 
